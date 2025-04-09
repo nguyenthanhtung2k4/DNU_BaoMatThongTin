@@ -1,0 +1,40 @@
+Định lượng  thông tin: 
+	- Lý thuyết thông tin d
+
+	
+ Công thức lượng hóa thông tin: 
+	
+	H(x) =  E [I(x)] = -  Sích ma X  p(x) LogP (x)
+
+	- Trong đó  	H(x) là:  Entropy
+			I(x) là: Information
+
+
+	-> entropy là: số hỗn loạn. 
+	
+
+============================================================================================	
+LÝ THUYẾT SỐ: 
+
+
+Độ dư thừa thông tin: 
+	- nén dữ liệu  dữ thừa
+	- Phát hiện và sửa  lỗi 
+
+Số đồng dư : là hai  số chia chia cho 1 số nguyên và cùng dư về 1 số ta gọi đó là đồng dư.
+
+
+Số nguyên tố là  lớn hơn 1 và vhir có hai ước số dương là 1  và chính nó.Mốt số nguyên dường p  được gọi là số nguyên tố nếu cad chỉ nếu chí có hai  số ước là 1 và chính nó.
+
+
+Modulo: là phần tử nghịch đảo của phép nhân.  Nếu hai  số nguyên a và n  nguyên
+	+  nghịch đảo cảu modulo là một số mà khi nhân với nó sẽ có tích là 1. Để tính thương cửa 2 số . ta nận 1 số nghịch đỏa của số kia.
+
+* Thuật toán educlid 
+* Thuật toán educlid Mở rộng. 
+
+
+
+
+
+

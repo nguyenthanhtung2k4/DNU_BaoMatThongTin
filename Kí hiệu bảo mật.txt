@@ -1,0 +1,5 @@
+c:   sai  phơ teacg 
+p:  plANTEXT
+k: key
+e:  EN CRIT SỜN 
+d:  DE CRIT SỜN 
