@@ -1,0 +1,2 @@
+# Hàm băng (  hash function )
+

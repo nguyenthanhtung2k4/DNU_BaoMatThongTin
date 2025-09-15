@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Giải mã kho báu – Level {{ level_id }}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #e0eafc, #cfdef3);
+      color: #2c3e50;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #1a2a6c;
+      color: white;
+      padding: 15px 30px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    header img {
+      height: 50px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+      letter-spacing: 1px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 60px auto 100px;
+      padding: 30px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h2 {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+    .question-block {
+      font-size: 18px;
+      background: #f0f0f0;
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      word-break: break-word;
+    }
+    .hint, .score {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 10px;
+    }
+    .score {
+      font-weight: bold;
+    }
+    .timer {
+      font-size: 16px;
+      color: #e74c3c;
+      margin-bottom: 25px;
+      font-weight: bold;
+    }
+    .option {
+      margin: 10px 0;
+    }
+    label {
+      font-size: 16px;
+    }
+    input[type="radio"] {
+      margin-right: 10px;
+    }
+    button {
+      background-color: #1abc9c;
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #16a085;
+    }
+    .flash {
+      background: #e74c3c;
+      color: white;
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+    footer {
+      background-color: #1a2a6c;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+  </style>
+  <script>
+    let timeLeft = 60;
+    function startCountdown() {
+      const timerEl = document.getElementById('countdown');
+      const interval = setInterval(() => {
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+          window.location.href = '/fail';
+        } else {
+          timerEl.textContent = `⏳ Thời gian còn lại: ${timeLeft} giây`;
+          timeLeft--;
+        }
+      }, 1000);
+    }
+    window.onload = startCountdown;
+  </script>
+</head>
+<body>
+<header>
+  <img src="https://cdn-icons-png.flaticon.com/512/3062/3062634.png" alt="Kho báu Logo">
+  <h1>Game “Giải mã kho báu”</h1>
+</header>
+
+  
+<div class="container">
+  <h2>🧩 Câu hỏi màn {{ level_id }}</h2>
+
+<div class="question-block">
+  <form method="GET" action="{{ url_for('toggle_hint') }}">
+  <button type="submit" style="margin-top: 10px; padding: 6px 12px; border-radius: 6px; border: none; background-color: #3498db; color: white; cursor: pointer;">
+    {% if show_hint %}Ẩn gợi ý{% else %} Hiện gợi ý{% endif %}
+  </button>
+</form>
+  <strong>🔐 Câu hỏi:</strong> {{ question | e }}
+  {% if show_hint and hint %}
+    <div class="hint">💡 Gợi ý: {{ hint }}</div>
+  {% endif %}
+</div>
+
+
+
+
+
+  <div class="score">🏆 Điểm hiện tại: {{ score }} / 100</div>
+  <div class="score">❗ Sai: {{ mistakes }} lần</div>
+  <div class="timer" id="countdown">⏳ Thời gian còn lại: 60 giây</div>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="flash">{{ messages[0] }}</div>
+    {% endif %}
+  {% endwith %}
+
+  <form method="POST" action="{{ url_for('check', level_id=level_id) }}">
+    {% for option in options %}
+      <div class="option">
+       <label><input type="radio" name="answer" value="{{ option | e }}" required> {{ option | e }}</label>
+      </div>
+    {% endfor %}
+    <button type="submit">🔓 Trả lời</button>
+  </form>
+</div>
+
+<footer>
+Trần Anh Tú • Nguyễn Thanh Tùng • Lê Thị Vân Anh<br>
+  Nhập môn An toàn bảo mật thông tin
+</footer>
+</body>
+</html>

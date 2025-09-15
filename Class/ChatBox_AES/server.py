@@ -97,7 +97,7 @@ def receive_messages(client_socket):
                     if decrypted_file:
                         save_path = os.path.join(os.getcwd(), f"received_{file_name}")
                         with open(save_path, 'wb') as f:
-                            f.write(decrypted_file)
+                            f.write(decrypted_file)4
                 
                         text_area.config(state='normal')
                         text_area.insert(tk.END, f"A (mã hóa - file): {encrypted_file[:50]}...\n")
